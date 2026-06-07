@@ -1,0 +1,42 @@
+{
+  "appId": "com.zenith.app",
+  "productName": "Zenith",
+  "directories": {
+    "output": "release"
+  },
+  "files": [
+    "dist/**/*",
+    "dist-electron/**/*",
+    "package.json"
+  ],
+  "mac": {
+    "category": "public.app-category.productivity",
+    "target": [
+      {
+        "target": "dmg",
+        "arch": [
+          "x64",
+          "arm64"
+        ]
+      }
+    ],
+    "minimumSystemVersion": "10.15.0"
+  },
+  "dmg": {
+    "iconSize": 100,
+    "title": "Install Zenith - ${version}",
+    "contents": [
+      {
+        "x": 130,
+        "y": 200,
+        "type": "file"
+      },
+      {
+        "x": 370,
+        "y": 200,
+        "type": "link",
+        "path": "/Applications"
+      }
+    ]
+  }
+}
