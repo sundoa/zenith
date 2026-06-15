@@ -328,8 +328,10 @@ window.addEventListener('keydown', (e) => {
         });
       },
       setActiveNoteId: (id) => {
+        const noteExists = get().notes.some(n => n.id === id);
+        const resolvedId = noteExists ? id : (get().notes[0]?.id ?? null);
         set({ 
-          activeNoteId: id,
+          activeNoteId: resolvedId,
           zoom: 1,
           pan: { x: 0, y: 0 },
           selectedObjectIds: [],
@@ -357,8 +359,27 @@ window.addEventListener('keydown', (e) => {
       // Workspaces & Folders Actions
       addWorkspace: (name) => {
         const id = 'ws-' + Math.random().toString(36).substring(2, 9);
+        const noteId = 'n-' + Math.random().toString(36).substring(2, 9);
+        const newNote: Note = {
+          id: noteId,
+          title: 'Getting Started',
+          folderId: null,
+          workspaceId: id,
+          isPinned: false,
+          tags: [],
+          lastModified: Date.now(),
+          content: '# Getting Started\n\nWelcome to your new workspace!',
+          layers: INITIAL_LAYERS,
+          canvasObjects: [],
+          textCards: []
+        };
         set((state) => ({
-          workspaces: [...state.workspaces, { id, name }]
+          workspaces: [...state.workspaces, { id, name }],
+          notes: [...state.notes, newNote],
+          activeNoteId: noteId,
+          zoom: 1,
+          pan: { x: 0, y: 0 },
+          selectedObjectIds: []
         }));
         return id;
       },
@@ -683,3 +704,11 @@ window.addEventListener('keydown', (e) => {
     }
   )
 );
+
+// Validate activeNoteId after persist hydration from localStorage
+useStore.persist.onFinishHydration(() => {
+  const state = useStore.getState();
+  if (state.notes.length > 0 && !state.notes.some(n => n.id === state.activeNoteId)) {
+    useStore.setState({ activeNoteId: state.notes[0].id });
+  }
+});

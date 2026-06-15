@@ -77,9 +77,12 @@ export const CanvasEditor: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   
+  // Refs for live drawing (avoids React state lag during active strokes)
+  const drawnPointsRef = useRef<[number, number, number][]>([]);
+  const rafRef = useRef<number | null>(null);
+
   // Drawing states
   const [isDrawing, setIsDrawing] = useState(false);
-  const [drawnPoints, setDrawnPoints] = useState<[number, number, number][]>([]);
   const [spacePressed, setSpacePressed] = useState(false);
   const [isPanning, setIsPanning] = useState(false);
   const [panStart, setPanStart] = useState({ x: 0, y: 0 });
@@ -121,6 +124,16 @@ export const CanvasEditor: React.FC = () => {
       window.removeEventListener('keyup', handleKeyUp);
     };
   }, [activeTool, setActiveTool]);
+
+  // Cleanup RAF on unmount
+  useEffect(() => {
+    return () => {
+      if (rafRef.current !== null) {
+        cancelAnimationFrame(rafRef.current);
+        rafRef.current = null;
+      }
+    };
+  }, []);
 
   // Adjust Canvas Resolution
   useEffect(() => {
@@ -206,7 +219,7 @@ export const CanvasEditor: React.FC = () => {
     });
 
     // Render current active drawing stroke preview
-    if (isDrawing && drawnPoints.length > 0) {
+    if (isDrawing && drawnPointsRef.current.length > 0) {
       ctx.save();
       ctx.strokeStyle = currentColor;
       ctx.fillStyle = currentColor;
@@ -214,7 +227,7 @@ export const CanvasEditor: React.FC = () => {
       ctx.globalAlpha = activeTool === 'highlighter' ? 0.45 : currentOpacity;
       
       if (activeTool === 'pencil' || activeTool === 'highlighter') {
-        const smoothed = smoothPoints(drawnPoints);
+        const smoothed = smoothPoints(drawnPointsRef.current);
         drawSmoothedStroke(ctx, smoothed, currentStrokeWidth, activeTool === 'highlighter');
       } else if (activeTool === 'lasso') {
         // Draw lasso polygon dotted
@@ -222,7 +235,7 @@ export const CanvasEditor: React.FC = () => {
         ctx.lineWidth = 2;
         ctx.setLineDash([6, 4]);
         ctx.beginPath();
-        drawnPoints.forEach((p, idx) => {
+        drawnPointsRef.current.forEach((p, idx) => {
           if (idx === 0) ctx.moveTo(p[0], p[1]);
           else ctx.lineTo(p[0], p[1]);
         });
@@ -232,7 +245,7 @@ export const CanvasEditor: React.FC = () => {
         const simulatedObj: CanvasObject = {
           id: 'preview',
           type: activeTool as any,
-          points: drawnPoints,
+          points: drawnPointsRef.current,
           color: currentColor,
           strokeWidth: currentStrokeWidth,
           opacity: currentOpacity,
@@ -352,7 +365,7 @@ export const CanvasEditor: React.FC = () => {
     // Lasso selection check
     if (activeTool === 'lasso') {
       setIsDrawing(true);
-      setDrawnPoints([[x, y, e.pressure || 0.5]]);
+      drawnPointsRef.current = [[x, y, e.pressure || 0.5]];
       return;
     }
 
@@ -363,7 +376,7 @@ export const CanvasEditor: React.FC = () => {
       if (activeLayer?.locked) return; // Locked layer!
 
       setIsDrawing(true);
-      setDrawnPoints([[x, y, e.pressure || 0.5]]);
+      drawnPointsRef.current = [[x, y, e.pressure || 0.5]];
       return;
     }
 
@@ -413,9 +426,14 @@ export const CanvasEditor: React.FC = () => {
       return;
     }
 
-    // Append drawing coordinate
-    setDrawnPoints((prev) => [...prev, [x, y, e.pressure || 0.5]]);
-    drawCanvas();
+    // Append drawing coordinate (ref, not state — avoids stale closure lag)
+    drawnPointsRef.current = [...drawnPointsRef.current, [x, y, e.pressure || 0.5]];
+    if (rafRef.current === null) {
+      rafRef.current = requestAnimationFrame(() => {
+        rafRef.current = null;
+        drawCanvas();
+      });
+    }
   };
 
   const handlePointerUp = (_e: React.PointerEvent<HTMLCanvasElement>) => {
@@ -429,25 +447,25 @@ export const CanvasEditor: React.FC = () => {
 
     if (activeTool === 'lasso') {
       performLassoSelection();
-      setDrawnPoints([]);
+      drawnPointsRef.current = [];
       return;
     }
 
-    if (drawnPoints.length < 2) {
-      setDrawnPoints([]);
+    if (drawnPointsRef.current.length < 2) {
+      drawnPointsRef.current = [];
       return;
     }
 
     // Make sure layer is unlocked
     const activeLayer = activeNote?.layers.find(l => l.id === activeLayerId);
     if (activeLayer?.locked) {
-      setDrawnPoints([]);
+      drawnPointsRef.current = [];
       return;
     }
 
     // Drawing finishes
     if (activeTool === 'pencil' || activeTool === 'highlighter') {
-      const smoothed = smoothPoints(drawnPoints);
+      const smoothed = smoothPoints(drawnPointsRef.current);
       addCanvasObject({
         type: activeTool,
         points: smoothed,
@@ -459,14 +477,14 @@ export const CanvasEditor: React.FC = () => {
       // Shape Snapping mode explicitly chosen
       addCanvasObject({
         type: activeTool,
-        points: drawnPoints,
+        points: drawnPointsRef.current,
         color: currentColor,
         strokeWidth: currentStrokeWidth,
         opacity: currentOpacity
       });
     } else if (activeTool === 'select') {
       // Recognition shape snap check (if drawing a path inside select mode, it can auto snap if resembling standard shapes)
-      const snapResult = recognizeAndSnapShape(drawnPoints);
+      const snapResult = recognizeAndSnapShape(drawnPointsRef.current);
       if (snapResult.type) {
         addCanvasObject({
           type: snapResult.type,
@@ -481,7 +499,7 @@ export const CanvasEditor: React.FC = () => {
       }
     }
 
-    setDrawnPoints([]);
+    drawnPointsRef.current = [];
   };
 
   // Click double-tap logic to spawn markdown / code blocks
@@ -548,10 +566,10 @@ export const CanvasEditor: React.FC = () => {
 
   // Lasso algorithm: checks which objects fall inside drawn path
   const performLassoSelection = () => {
-    if (!activeNote || drawnPoints.length < 3) return;
+    if (!activeNote || drawnPointsRef.current.length < 3) return;
     
     // Polygon points represent the closed lasso path
-    const polygon = drawnPoints.map(p => [p[0], p[1]] as [number, number]);
+    const polygon = drawnPointsRef.current.map(p => [p[0], p[1]] as [number, number]);
     const selectedIds: string[] = [];
 
     // Ray-casting check for containment
@@ -668,6 +686,18 @@ export const CanvasEditor: React.FC = () => {
     downloadAnchor.click();
     downloadAnchor.remove();
   };
+
+  if (!activeNote) {
+    return (
+      <div className="relative w-full h-full flex-1 flex flex-col items-center justify-center gap-3 select-none bg-[#fafafa] dark:bg-[#07080b]">
+        <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-zinc-900 flex items-center justify-center">
+          <Edit3 size={18} className="text-slate-400 dark:text-zinc-500" />
+        </div>
+        <p className="text-sm font-medium text-slate-400 dark:text-zinc-500">No note selected</p>
+        <p className="text-[11px] text-slate-400 dark:text-zinc-600">Select or create a note from the sidebar</p>
+      </div>
+    );
+  }
 
   return (
     <div 

@@ -10,6 +10,11 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
+dist-electron
+release
+*.dmg
+*.blockmap
+latest-mac.yml
 *.local
 
 # Editor directories and files

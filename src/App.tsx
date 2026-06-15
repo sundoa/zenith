@@ -7,6 +7,7 @@ import { CanvasEditor } from './components/CanvasEditor';
 import { CommandPalette } from './components/CommandPalette';
 import { ShortcutsManager } from './components/ShortcutsManager';
 import { Onboarding } from './components/Onboarding';
+import { ErrorBoundary } from './components/ErrorBoundary';
 import { 
   ChevronRight,
   Sun,
@@ -72,8 +73,9 @@ export const App: React.FC = () => {
       <div className="flex-1 h-full flex flex-col overflow-hidden relative">
         
         {/* Floating Top Header Bar */}
-        <header className="h-12 border-b border-slate-200 dark:border-zinc-900 bg-white/70 dark:bg-[#0c0d12]/70 backdrop-blur-md flex items-center justify-between px-6 pl-20 z-20 select-none">
-          <div className="flex items-center gap-3">
+        <header className="h-12 border-b border-slate-200 dark:border-zinc-900 bg-white/70 dark:bg-[#0c0d12]/70 backdrop-blur-md flex items-center justify-between px-6 pl-20 z-20 select-none"
+          style={{ WebkitAppRegion: 'drag' } as React.CSSProperties}>
+          <div className="flex items-center gap-3" style={{ WebkitAppRegion: 'no-drag' } as React.CSSProperties}>
             {/* Sidebar Toggle Button */}
             {isSidebarCollapsed && (
               <button
@@ -97,7 +99,8 @@ export const App: React.FC = () => {
           </div>
 
           {/* Center Pane: Split-Screen view selectors */}
-          <div className="flex items-center bg-slate-100 dark:bg-zinc-900 p-0.5 rounded-lg border border-slate-200 dark:border-zinc-800/80">
+          <div className="flex items-center bg-slate-100 dark:bg-zinc-900 p-0.5 rounded-lg border border-slate-200 dark:border-zinc-800/80"
+            style={{ WebkitAppRegion: 'no-drag' } as React.CSSProperties}>
             <button
               onClick={() => setLayoutMode('editor')}
               className={`px-3 py-1 rounded-md text-[10px] font-bold uppercase transition-all flex items-center gap-1 ${
@@ -134,7 +137,7 @@ export const App: React.FC = () => {
           </div>
 
           {/* Right actions: Quick Theme & Shortcuts */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2" style={{ WebkitAppRegion: 'no-drag' } as React.CSSProperties}>
             <button
               onClick={() => setIsShortcutsOpen(true)}
               className="p-1.5 hover:bg-slate-100 dark:hover:bg-zinc-800 rounded-lg text-slate-500 dark:text-zinc-400"
@@ -157,16 +160,18 @@ export const App: React.FC = () => {
 
         {/* Dynamic Split Layout Body */}
         <div className="flex-1 flex overflow-hidden relative">
-          {layoutMode !== 'canvas' && (
-            <div className={`h-full ${layoutMode === 'editor' ? 'w-full' : 'w-2/5 md:w-1/3'} shrink-0`}>
-              <MarkdownEditor onOpenShortcuts={() => setIsShortcutsOpen(true)} />
-            </div>
-          )}
-          {layoutMode !== 'editor' && (
-            <div className="flex-1 h-full">
-              <CanvasEditor />
-            </div>
-          )}
+          <ErrorBoundary>
+            {layoutMode !== 'canvas' && (
+              <div className={`h-full ${layoutMode === 'editor' ? 'w-full' : 'w-2/5 md:w-1/3'} shrink-0`}>
+                <MarkdownEditor key={activeNoteId || 'none'} onOpenShortcuts={() => setIsShortcutsOpen(true)} />
+              </div>
+            )}
+            {layoutMode !== 'editor' && (
+              <div className="flex-1 h-full">
+                <CanvasEditor key={activeNoteId || 'none'} />
+              </div>
+            )}
+          </ErrorBoundary>
         </div>
       </div>
 

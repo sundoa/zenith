@@ -1,7 +1,7 @@
 {
   "name": "zenith",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.1.2",
   "type": "module",
   "homepage": "https://sundoa.github.io/zenith",
   "description": "Zenith — Infinite Canvas & Command Center. A local-first, keyboard-driven workspace blending text notes, hand-drawn sketches, sticky notes, and diagrams with a Spotlight-inspired CMD+K command center.",
