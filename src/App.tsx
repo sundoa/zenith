@@ -72,7 +72,7 @@ export const App: React.FC = () => {
       <div className="flex-1 h-full flex flex-col overflow-hidden relative">
         
         {/* Floating Top Header Bar */}
-        <header className="h-12 border-b border-slate-200 dark:border-zinc-900 bg-white/70 dark:bg-[#0c0d12]/70 backdrop-blur-md flex items-center justify-between px-6 z-20 select-none">
+        <header className="h-12 border-b border-slate-200 dark:border-zinc-900 bg-white/70 dark:bg-[#0c0d12]/70 backdrop-blur-md flex items-center justify-between px-6 pl-20 z-20 select-none">
           <div className="flex items-center gap-3">
             {/* Sidebar Toggle Button */}
             {isSidebarCollapsed && (
@@ -102,7 +102,7 @@ export const App: React.FC = () => {
               onClick={() => setLayoutMode('editor')}
               className={`px-3 py-1 rounded-md text-[10px] font-bold uppercase transition-all flex items-center gap-1 ${
                 layoutMode === 'editor'
-                  ? 'bg-white dark:bg-zinc-800 text-violet-600 dark:text-violet-400 shadow-sm'
+                  ? 'bg-white dark:bg-zinc-800 text-blue-600 dark:text-blue-400 shadow-sm'
                   : 'text-slate-500 hover:text-slate-700 dark:text-zinc-400'
               }`}
               title="Markdown Editor Only"
@@ -113,7 +113,7 @@ export const App: React.FC = () => {
               onClick={() => setLayoutMode('both')}
               className={`px-3 py-1 rounded-md text-[10px] font-bold uppercase transition-all flex items-center gap-1 ${
                 layoutMode === 'both'
-                  ? 'bg-white dark:bg-zinc-800 text-violet-600 dark:text-violet-400 shadow-sm'
+                  ? 'bg-white dark:bg-zinc-800 text-blue-600 dark:text-blue-400 shadow-sm'
                   : 'text-slate-500 hover:text-slate-700 dark:text-zinc-400'
               }`}
               title="Split Markdown & Canvas"
@@ -124,7 +124,7 @@ export const App: React.FC = () => {
               onClick={() => setLayoutMode('canvas')}
               className={`px-3 py-1 rounded-md text-[10px] font-bold uppercase transition-all flex items-center gap-1 ${
                 layoutMode === 'canvas'
-                  ? 'bg-white dark:bg-zinc-800 text-violet-600 dark:text-violet-400 shadow-sm'
+                  ? 'bg-white dark:bg-zinc-800 text-blue-600 dark:text-blue-400 shadow-sm'
                   : 'text-slate-500 hover:text-slate-700 dark:text-zinc-400'
               }`}
               title="Infinite Canvas Only"

@@ -97,7 +97,7 @@ export const MarkdownEditor: React.FC<MarkdownEditorProps> = () => {
     {
       label: 'Code Widget',
       desc: 'Insert a TypeScript code editor card',
-      icon: <Terminal size={14} className="text-violet-500" />,
+      icon: <Terminal size={14} className="text-blue-500" />,
       run: () => {
         addTextCard({
           type: 'code',
@@ -230,12 +230,12 @@ export const MarkdownEditor: React.FC<MarkdownEditorProps> = () => {
         <button
           onClick={() => togglePinNote(note.id)}
           className={`p-1.5 rounded-lg border ${note.isPinned
-            ? 'bg-violet-500/10 border-violet-500/20 text-violet-500'
+            ? 'bg-blue-500/10 border-blue-500/20 text-blue-500'
             : 'border-slate-200 dark:border-zinc-800 text-slate-400 hover:text-slate-600 dark:hover:text-white'
             }`}
           title={note.isPinned ? "Unpin Note" : "Pin Note"}
         >
-          <Pin size={14} className={note.isPinned ? "fill-violet-500" : ""} />
+          <Pin size={14} className={note.isPinned ? "fill-blue-500" : ""} />
         </button>
       </div>
 
@@ -296,14 +296,14 @@ export const MarkdownEditor: React.FC<MarkdownEditorProps> = () => {
                   key={cmd.label}
                   onClick={() => executeSlashCommand(cmd)}
                   className={`w-full flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-left text-xs transition-colors ${isSelected
-                    ? 'bg-violet-500 text-white font-semibold'
+                    ? 'bg-blue-500 text-white font-semibold'
                     : 'hover:bg-slate-100 dark:hover:bg-zinc-800/60 text-slate-700 dark:text-zinc-300'
                     }`}
                 >
                   <div className={isSelected ? 'text-white' : ''}>{cmd.icon}</div>
                   <div>
                     <span className="block font-medium">{cmd.label}</span>
-                    <span className={`text-[9px] block opacity-85 ${isSelected ? 'text-violet-100' : 'text-slate-400 dark:text-zinc-500'}`}>
+                    <span className={`text-[9px] block opacity-85 ${isSelected ? 'text-blue-100' : 'text-slate-400 dark:text-zinc-500'}`}>
                       {cmd.desc}
                     </span>
                   </div>
@@ -318,13 +318,13 @@ export const MarkdownEditor: React.FC<MarkdownEditorProps> = () => {
       {backlinks.length > 0 && (
         <div className="border-t border-slate-200 dark:border-zinc-900 pt-3 select-none">
           <span className="text-[10px] font-bold text-slate-400 dark:text-zinc-500 uppercase tracking-wider flex items-center gap-1">
-            <Link size={10} className="text-violet-500" /> Backlinks to this page
+            <Link size={10} className="text-blue-500" /> Backlinks to this page
           </span>
           <div className="flex flex-wrap gap-1.5 mt-1.5">
             {backlinks.map((n) => (
               <span
                 key={n.id}
-                className="bg-violet-500/5 text-violet-600 dark:text-violet-400 border border-violet-500/10 px-2.5 py-1 rounded-md text-[10px] font-medium"
+                className="bg-blue-500/5 text-blue-600 dark:text-blue-400 border border-blue-500/10 px-2.5 py-1 rounded-md text-[10px] font-medium"
               >
                 {n.title}
               </span>

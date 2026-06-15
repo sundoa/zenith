@@ -1,9 +1,11 @@
 {
   "name": "zenith",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "homepage": "https://sundoa.github.io/zenith",
+  "description": "Zenith — Infinite Canvas & Command Center. A local-first, keyboard-driven workspace blending text notes, hand-drawn sketches, sticky notes, and diagrams with a Spotlight-inspired CMD+K command center.",
+  "author": "Vihaan Patel",
   "main": "dist-electron/main.js",
   "scripts": {
     "dev": "vite",
@@ -11,7 +13,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "electron:dev": "vite & sleep 3 && electron .",
-    "electron:build": "tsc --project tsconfig.electron.json --outDir dist-electron && vite build && electron-builder"
+    "electron:build": "tsc --project tsconfig.electron.json --outDir dist-electron && vite build --config vite.config.electron.ts && electron-builder"
   },
   "dependencies": {
     "framer-motion": "^12.40.0",

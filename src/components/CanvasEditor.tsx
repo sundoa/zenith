@@ -719,7 +719,7 @@ export const CanvasEditor: React.FC = () => {
                     ? 'text-slate-800 border-none p-4 font-sans font-medium' 
                     : 'bg-white dark:bg-[#12131a] border border-slate-200 dark:border-zinc-800 text-slate-800 dark:text-zinc-200'
                 } ${
-                  isSelected ? 'ring-2 ring-violet-500 shadow-xl' : 'hover:shadow-md'
+                  isSelected ? 'ring-2 ring-blue-500 shadow-xl' : 'hover:shadow-md'
                 }`}
                 onMouseDown={(e) => handleCardDragStart(e, card)}
                 onDoubleClick={(e) => {
@@ -778,7 +778,7 @@ export const CanvasEditor: React.FC = () => {
                   ) : (
                     <div className="w-full h-full break-words prose prose-sm dark:prose-invert">
                       {card.type === 'code' ? (
-                        <pre className="font-mono text-xs bg-slate-50 dark:bg-zinc-950 p-2 rounded border border-slate-200 dark:border-zinc-800 overflow-x-auto text-violet-600 dark:text-violet-400">
+                        <pre className="font-mono text-xs bg-slate-50 dark:bg-zinc-950 p-2 rounded border border-slate-200 dark:border-zinc-800 overflow-x-auto text-blue-600 dark:text-blue-400">
                           <code>{card.content}</code>
                         </pre>
                       ) : (
@@ -830,7 +830,7 @@ export const CanvasEditor: React.FC = () => {
                     onMouseDown={(e) => handleCardResizeStart(e, card)}
                     className="absolute bottom-0 right-0 w-3.5 h-3.5 cursor-se-resize flex items-center justify-center pointer-events-auto"
                   >
-                    <Maximize2 size={10} className="text-violet-500 rotate-90" />
+                    <Maximize2 size={10} className="text-blue-500 rotate-90" />
                   </div>
                 )}
               </div>
@@ -844,7 +844,7 @@ export const CanvasEditor: React.FC = () => {
         <div className="absolute right-4 top-20 w-64 glass rounded-xl border border-slate-200 dark:border-zinc-800 shadow-2xl p-4 z-40 select-none animate-scale-in">
           <div className="flex items-center justify-between mb-3 border-b border-slate-200 dark:border-zinc-800 pb-2">
             <span className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-zinc-400 flex items-center gap-1.5">
-              <Layers size={13} className="text-violet-500" /> Layer Manager
+              <Layers size={13} className="text-blue-500" /> Layer Manager
             </span>
             <button 
               onClick={() => setShowLayersPanel(false)}
@@ -862,7 +862,7 @@ export const CanvasEditor: React.FC = () => {
                 onClick={() => setActiveLayerId(l.id)}
                 className={`flex items-center justify-between p-1.5 rounded-md text-xs cursor-pointer ${
                   activeLayerId === l.id 
-                    ? 'bg-violet-500/10 text-violet-600 dark:text-violet-400 font-semibold border border-violet-500/20' 
+                    ? 'bg-blue-500/10 text-blue-600 dark:text-blue-400 font-semibold border border-blue-500/20' 
                     : 'hover:bg-slate-100 dark:hover:bg-zinc-800/50 text-slate-600 dark:text-zinc-400 border border-transparent'
                 }`}
               >
@@ -904,7 +904,7 @@ export const CanvasEditor: React.FC = () => {
             />
             <button
               type="submit"
-              className="bg-violet-500 hover:bg-violet-600 text-white rounded p-1"
+              className="bg-blue-500 hover:bg-blue-600 text-white rounded p-1"
             >
               <Plus size={12} />
             </button>
@@ -955,7 +955,7 @@ export const CanvasEditor: React.FC = () => {
           onClick={() => setShowLayersPanel(!showLayersPanel)}
           className={`p-2 rounded-xl border shadow-lg flex items-center justify-center transition-colors ${
             showLayersPanel 
-              ? 'bg-violet-500 border-violet-600 text-white' 
+              ? 'bg-blue-500 border-blue-600 text-white' 
               : 'bg-white dark:bg-[#12131a]/90 border-slate-200 dark:border-zinc-800 text-slate-500 dark:text-zinc-400 hover:bg-slate-100 dark:hover:bg-zinc-800'
           }`}
           title="Layers"
@@ -983,7 +983,7 @@ export const CanvasEditor: React.FC = () => {
                 style={{ backgroundColor: c }}
                 onClick={() => setCurrentColor(c)}
                 className={`w-4 h-4 rounded-full border border-slate-200 dark:border-zinc-700 transition-transform ${
-                  currentColor === c ? 'scale-125 ring-1 ring-violet-500' : 'hover:scale-110'
+                  currentColor === c ? 'scale-125 ring-1 ring-blue-500' : 'hover:scale-110'
                 }`}
               />
             ))}
@@ -998,7 +998,7 @@ export const CanvasEditor: React.FC = () => {
               max="20"
               value={currentStrokeWidth}
               onChange={(e) => setCurrentStrokeWidth(Number(e.target.value))}
-              className="w-16 h-1 bg-slate-200 dark:bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-violet-500"
+              className="w-16 h-1 bg-slate-200 dark:bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-blue-500"
             />
             <span className="text-xs font-mono font-semibold text-slate-500 dark:text-zinc-400 w-4 select-none">
               {currentStrokeWidth}
@@ -1015,7 +1015,7 @@ export const CanvasEditor: React.FC = () => {
           onClick={() => setActiveTool('select')}
           className={`p-2 rounded-xl flex items-center justify-center transition-colors ${
             activeTool === 'select' 
-              ? 'bg-violet-500 text-white font-semibold' 
+              ? 'bg-blue-500 text-white font-semibold' 
               : 'hover:bg-slate-100 dark:hover:bg-zinc-800/80 text-slate-500 dark:text-zinc-400'
           }`}
           title="Selection Mode (Tab)"
@@ -1028,7 +1028,7 @@ export const CanvasEditor: React.FC = () => {
           onClick={() => setActiveTool('lasso')}
           className={`p-2 rounded-xl flex items-center justify-center transition-colors ${
             activeTool === 'lasso' 
-              ? 'bg-violet-500 text-white font-semibold' 
+              ? 'bg-blue-500 text-white font-semibold' 
               : 'hover:bg-slate-100 dark:hover:bg-zinc-800/80 text-slate-500 dark:text-zinc-400'
           }`}
           title="Lasso select path"
@@ -1043,7 +1043,7 @@ export const CanvasEditor: React.FC = () => {
           onClick={() => setActiveTool('pencil')}
           className={`p-2 rounded-xl flex items-center justify-center transition-colors ${
             activeTool === 'pencil' 
-              ? 'bg-violet-500 text-white font-semibold' 
+              ? 'bg-blue-500 text-white font-semibold' 
               : 'hover:bg-slate-100 dark:hover:bg-zinc-800/80 text-slate-500 dark:text-zinc-400'
           }`}
           title="Pressure-sensitive Pencil"
@@ -1056,7 +1056,7 @@ export const CanvasEditor: React.FC = () => {
           onClick={() => setActiveTool('highlighter')}
           className={`p-2 rounded-xl flex items-center justify-center transition-colors ${
             activeTool === 'highlighter' 
-              ? 'bg-violet-500 text-white font-semibold' 
+              ? 'bg-blue-500 text-white font-semibold' 
               : 'hover:bg-slate-100 dark:hover:bg-zinc-800/80 text-slate-500 dark:text-zinc-400'
           }`}
           title="Highlighter"
@@ -1069,7 +1069,7 @@ export const CanvasEditor: React.FC = () => {
           onClick={() => setActiveTool('circle')} // Circle as representative for Snapping
           className={`p-2 rounded-xl flex items-center justify-center transition-colors ${
             ['circle', 'rect', 'line', 'triangle', 'arrow'].includes(activeTool)
-              ? 'bg-violet-500 text-white font-semibold' 
+              ? 'bg-blue-500 text-white font-semibold' 
               : 'hover:bg-slate-100 dark:hover:bg-zinc-800/80 text-slate-500 dark:text-zinc-400'
           }`}
           title="Snap-to-Shape Draw Tool"
@@ -1082,7 +1082,7 @@ export const CanvasEditor: React.FC = () => {
           onClick={() => setActiveTool('eraser')}
           className={`p-2 rounded-xl flex items-center justify-center transition-colors ${
             activeTool === 'eraser' 
-              ? 'bg-violet-500 text-white font-semibold' 
+              ? 'bg-blue-500 text-white font-semibold' 
               : 'hover:bg-slate-100 dark:hover:bg-zinc-800/80 text-slate-500 dark:text-zinc-400'
           }`}
           title="Path Eraser"
@@ -1097,7 +1097,7 @@ export const CanvasEditor: React.FC = () => {
           onClick={() => setActiveTool('text')}
           className={`p-2 rounded-xl flex items-center justify-center transition-colors ${
             activeTool === 'text' 
-              ? 'bg-violet-500 text-white font-semibold' 
+              ? 'bg-blue-500 text-white font-semibold' 
               : 'hover:bg-slate-100 dark:hover:bg-zinc-800/80 text-slate-500 dark:text-zinc-400'
           }`}
           title="Add Text Card (double-click canvas)"
@@ -1109,7 +1109,7 @@ export const CanvasEditor: React.FC = () => {
           onClick={() => setActiveTool('sticky')}
           className={`p-2 rounded-xl flex items-center justify-center transition-colors ${
             activeTool === 'sticky' 
-              ? 'bg-violet-500 text-white font-semibold' 
+              ? 'bg-blue-500 text-white font-semibold' 
               : 'hover:bg-slate-100 dark:hover:bg-zinc-800/80 text-slate-500 dark:text-zinc-400'
           }`}
           title="Add Sticky Note"
@@ -1121,7 +1121,7 @@ export const CanvasEditor: React.FC = () => {
           onClick={() => setActiveTool('code')}
           className={`p-2 rounded-xl flex items-center justify-center transition-colors ${
             activeTool === 'code' 
-              ? 'bg-violet-500 text-white font-semibold' 
+              ? 'bg-blue-500 text-white font-semibold' 
               : 'hover:bg-slate-100 dark:hover:bg-zinc-800/80 text-slate-500 dark:text-zinc-400'
           }`}
           title="Add Code Snippet Widget"

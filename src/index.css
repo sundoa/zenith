@@ -55,12 +55,12 @@
 /* Dot Grid Background for Infinite Drawing Canvas */
 .dot-grid {
   background-size: 24px 24px;
-  background-image: radial-gradient(circle, rgba(99, 102, 241, 0.15) 1px, transparent 1px);
+  background-image: radial-gradient(circle, rgba(59, 130, 246, 0.15) 1px, transparent 1px);
 }
 
 .dark .dot-grid {
   background-size: 24px 24px;
-  background-image: radial-gradient(circle, rgba(139, 92, 246, 0.1) 1.5px, transparent 1.5px);
+  background-image: radial-gradient(circle, rgba(96, 165, 250, 0.1) 1.5px, transparent 1.5px);
 }
 
 /* Input text cursor fix and outline removals */
@@ -70,7 +70,7 @@ input, textarea {
 
 /* Selection styles */
 ::selection {
-  background: rgba(139, 92, 246, 0.3);
+  background: rgba(59, 130, 246, 0.3);
 }
 
 /* Prevent double click zoom on iOS and Sidecar devices */

@@ -13,13 +13,13 @@ export const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
     {
       title: "Draw & Write on a Single Canvas",
       desc: "An infinite workspace where sketches, diagrams, rich text cards, yellow sticky notes, and code blocks coexist naturally. Instantly switch between cursor selection and pen brushes by pressing TAB.",
-      icon: <Sparkles className="w-12 h-12 text-violet-500" />,
+      icon: <Sparkles className="w-12 h-12 text-blue-500" />,
       graphic: (
         <div className="relative w-full h-44 bg-slate-50 dark:bg-zinc-950 rounded-2xl border border-slate-200 dark:border-zinc-800 p-4 overflow-hidden flex items-center justify-center select-none">
           <div className="absolute top-4 left-4 bg-yellow-200 text-slate-800 p-2 text-[10px] rounded-lg shadow-md max-w-[120px] font-medium leading-tight">
             💡 Drag and drop cards anywhere!
           </div>
-          <svg className="w-48 h-24 text-violet-500 opacity-60" viewBox="0 0 200 100" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+          <svg className="w-48 h-24 text-blue-500 opacity-60" viewBox="0 0 200 100" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
             {/* Smooth flow diagram */}
             <rect x="10" y="35" width="40" height="30" rx="6" />
             <path d="M50 50 H90" strokeDasharray="4 2" />
@@ -27,7 +27,7 @@ export const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
             <circle cx="115" cy="50" r="20" />
             <path d="M135 50 Q160 50 170 20" />
           </svg>
-          <div className="absolute bottom-4 right-4 bg-zinc-900 border border-zinc-800 text-violet-400 font-mono text-[9px] p-2 rounded shadow-md">
+          <div className="absolute bottom-4 right-4 bg-zinc-900 border border-zinc-800 text-blue-400 font-mono text-[9px] p-2 rounded shadow-md">
             {"const app = 'Zenith';"}
           </div>
         </div>
@@ -41,10 +41,10 @@ export const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
         <div className="w-full h-44 bg-slate-50 dark:bg-zinc-950 rounded-2xl border border-slate-200 dark:border-zinc-800 p-4 flex flex-col justify-center select-none">
           <div className="bg-white/80 dark:bg-[#12131a] rounded-xl border border-slate-200 dark:border-zinc-800/80 p-2 shadow-lg max-w-sm mx-auto w-full space-y-1.5">
             <div className="flex items-center gap-2 text-xs border-b border-slate-200 dark:border-zinc-800 pb-1.5 text-slate-400">
-              <span className="text-violet-500">🔍</span>
+              <span className="text-blue-500">🔍</span>
               <span>Search: "theme"</span>
             </div>
-            <div className="bg-violet-500 text-white rounded p-1.5 text-[10px] flex justify-between font-semibold">
+            <div className="bg-blue-500 text-white rounded p-1.5 text-[10px] flex justify-between font-semibold">
               <span>🌓 Toggle Dark/Light Mode</span>
               <span className="opacity-75">CMD+K</span>
             </div>
@@ -106,7 +106,7 @@ export const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
         className="w-full max-w-lg bg-white dark:bg-[#0c0d12] border border-slate-200 dark:border-zinc-900 rounded-3xl shadow-mac-shadow overflow-hidden flex flex-col p-8 md:p-10 relative"
       >
         {/* Glow decorations */}
-        <div className="absolute -top-20 -left-20 w-48 h-48 bg-violet-500/10 dark:bg-violet-500/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -top-20 -left-20 w-48 h-48 bg-blue-500/10 dark:bg-blue-500/5 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute -bottom-20 -right-20 w-48 h-48 bg-teal-500/10 dark:bg-teal-500/5 rounded-full blur-3xl pointer-events-none" />
 
         <div className="flex-1 flex flex-col justify-between min-h-[360px] relative z-10">
@@ -146,7 +146,7 @@ export const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
                   onClick={() => setCurrentSlide(idx)}
                   className={`w-2 h-2 rounded-full transition-all ${
                     idx === currentSlide 
-                      ? 'bg-violet-500 w-4' 
+                      ? 'bg-blue-500 w-4' 
                       : 'bg-slate-200 dark:bg-zinc-800'
                   }`}
                 />
@@ -156,7 +156,7 @@ export const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
             {/* Slide action trigger */}
             <button
               onClick={handleNext}
-              className="bg-violet-500 hover:bg-violet-600 text-white rounded-xl px-5 py-2.5 text-xs font-bold shadow-lg shadow-violet-500/20 hover:shadow-violet-500/30 flex items-center gap-1.5 transition-all hover:translate-x-0.5 active:scale-95"
+              className="bg-blue-500 hover:bg-blue-600 text-white rounded-xl px-5 py-2.5 text-xs font-bold shadow-lg shadow-blue-500/20 hover:shadow-blue-500/30 flex items-center gap-1.5 transition-all hover:translate-x-0.5 active:scale-95"
             >
               <span>{currentSlide === slides.length - 1 ? 'Launch Zenith' : 'Continue'}</span>
               <ArrowRight size={13} />

@@ -109,14 +109,14 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenShortcuts, isCollapsed, 
               key={ws.id}
               onClick={() => setActiveWorkspaceId(ws.id)}
               className={`w-9 h-9 rounded-xl flex items-center justify-center text-xs font-bold transition-all relative ${isActive
-                  ? 'bg-violet-500 text-white shadow-md shadow-violet-500/20'
+                  ? 'bg-blue-500 text-white shadow-md shadow-blue-500/20'
                   : 'bg-slate-200/50 hover:bg-slate-200 dark:bg-zinc-800/40 dark:hover:bg-zinc-800 text-slate-600 dark:text-zinc-400'
                 }`}
               title={ws.name}
             >
               {initials}
               {isActive && (
-                <div className="absolute left-0 w-1 h-4 bg-violet-500 rounded-r-md top-1/2 -translate-y-1/2" />
+                <div className="absolute left-0 w-1 h-4 bg-blue-500 rounded-r-md top-1/2 -translate-y-1/2" />
               )}
             </button>
           );
@@ -133,7 +133,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenShortcuts, isCollapsed, 
               setActiveWorkspaceId(newWsId);
             }
           }}
-          className="w-9 h-9 rounded-xl border border-dashed border-slate-300 dark:border-zinc-800 hover:border-violet-500 text-slate-400 hover:text-violet-500 flex items-center justify-center transition-all hover:scale-105"
+          className="w-9 h-9 rounded-xl border border-dashed border-slate-300 dark:border-zinc-800 hover:border-blue-500 text-slate-400 hover:text-blue-500 flex items-center justify-center transition-all hover:scale-105"
           title="New Workspace"
         >
           <Plus size={16} />
@@ -183,7 +183,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenShortcuts, isCollapsed, 
               onChange={(e) => setNewFolderName(e.target.value)}
               className="flex-1 text-[11px] bg-slate-50 dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 rounded px-2 py-1 text-slate-800 dark:text-white outline-none"
             />
-            <button type="submit" className="bg-violet-500 hover:bg-violet-600 text-white rounded px-2 py-1 text-[10px] font-semibold">
+            <button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white rounded px-2 py-1 text-[10px] font-semibold">
               Add
             </button>
           </form>
@@ -212,7 +212,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenShortcuts, isCollapsed, 
           {pinnedNotes.length > 0 && (
             <div className="space-y-1">
               <span className="text-[10px] font-bold text-slate-400 dark:text-zinc-500 uppercase tracking-wider flex items-center gap-1">
-                <Pin size={10} className="text-violet-500" /> Pinned Notes
+                <Pin size={10} className="text-blue-500" /> Pinned Notes
               </span>
               <div className="space-y-0.5">
                 {pinnedNotes.map((note) => (
@@ -225,7 +225,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenShortcuts, isCollapsed, 
           {/* Folder Hierarchy List */}
           <div className="space-y-1">
             <span className="text-[10px] font-bold text-slate-400 dark:text-zinc-500 uppercase tracking-wider flex items-center gap-1">
-              <BookOpen size={10} className="text-violet-500" /> Folders & Notes
+              <BookOpen size={10} className="text-blue-500" /> Folders & Notes
             </span>
             <div className="space-y-1">
               {workspaceFolders.map((folder) => {
@@ -241,7 +241,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenShortcuts, isCollapsed, 
                     >
                       <div className="flex items-center gap-1 truncate">
                         {isExpanded ? <ChevronDown size={12} className="text-slate-400" /> : <ChevronRight size={12} className="text-slate-400" />}
-                        <FolderIcon size={12} className="text-violet-500" />
+                        <FolderIcon size={12} className="text-blue-500" />
                         <span className="truncate">{folder.name}</span>
                       </div>
                       <button
@@ -294,7 +294,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenShortcuts, isCollapsed, 
                       key={tag}
                       onClick={() => setSelectedTag(isActive ? null : tag)}
                       className={`text-[9px] px-2 py-0.5 rounded-full flex items-center gap-0.5 transition-colors border ${isActive
-                          ? 'bg-violet-500 text-white border-violet-600 font-semibold'
+                          ? 'bg-blue-500 text-white border-blue-600 font-semibold'
                           : 'bg-slate-100 hover:bg-slate-200 dark:bg-zinc-900 dark:hover:bg-zinc-800 text-slate-600 dark:text-zinc-400 border-slate-200 dark:border-zinc-800'
                         }`}
                     >
@@ -314,7 +314,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenShortcuts, isCollapsed, 
             onClick={onOpenShortcuts}
             className="w-full flex items-center gap-2 p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-zinc-800/60 text-slate-500 hover:text-slate-800 dark:text-zinc-400 dark:hover:text-white text-xs font-semibold"
           >
-            <Keyboard size={14} className="text-violet-500" />
+            <Keyboard size={14} className="text-blue-500" />
             <span>Shortcuts Manager</span>
           </button>
         </div>
@@ -337,7 +337,7 @@ const NoteItem: React.FC<NoteItemProps> = ({ note, isActive, onSelect, onDelete,
     <div
       onClick={() => onSelect(note.id)}
       className={`flex items-center justify-between p-1.5 rounded-md text-xs cursor-pointer group truncate border border-transparent ${isActive
-          ? 'bg-violet-500 text-white font-semibold shadow-sm'
+          ? 'bg-blue-500 text-white font-semibold shadow-sm'
           : 'hover:bg-slate-100 dark:hover:bg-zinc-850/45 text-slate-600 dark:text-zinc-400'
         }`}
     >
@@ -345,14 +345,14 @@ const NoteItem: React.FC<NoteItemProps> = ({ note, isActive, onSelect, onDelete,
       <div className="flex items-center gap-1.5 opacity-0 group-hover:opacity-100" onClick={e => e.stopPropagation()}>
         <button
           onClick={() => onPin(note.id)}
-          className={`p-0.5 rounded ${isActive ? 'hover:bg-violet-600' : 'hover:bg-slate-200 dark:hover:bg-zinc-800'}`}
+          className={`p-0.5 rounded ${isActive ? 'hover:bg-blue-600' : 'hover:bg-slate-200 dark:hover:bg-zinc-800'}`}
           title={note.isPinned ? 'Unpin page' : 'Pin page'}
         >
           {note.isPinned ? <PinOff size={10} /> : <Pin size={10} />}
         </button>
         <button
           onClick={() => onDelete(note.id)}
-          className={`p-0.5 rounded text-red-500 hover:text-red-600 ${isActive ? 'hover:bg-violet-600' : 'hover:bg-slate-200 dark:hover:bg-zinc-800'}`}
+          className={`p-0.5 rounded text-red-500 hover:text-red-600 ${isActive ? 'hover:bg-blue-600' : 'hover:bg-slate-200 dark:hover:bg-zinc-800'}`}
           title="Delete Note"
         >
           <Trash2 size={10} />

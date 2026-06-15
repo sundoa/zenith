@@ -277,19 +277,19 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
                       }}
                       className={`w-full flex items-center justify-between px-3 py-2 rounded-lg text-left transition-colors ${
                         isSelected 
-                          ? 'bg-violet-500 text-white font-semibold shadow-sm' 
+                          ? 'bg-blue-500 text-white font-semibold shadow-sm' 
                           : 'hover:bg-slate-100/80 dark:hover:bg-zinc-800/40 text-slate-700 dark:text-zinc-300'
                       }`}
                     >
                       <div className="flex items-center gap-3 min-w-0">
-                        {res.type === 'title' && <FileText size={15} className={isSelected ? 'text-white' : 'text-violet-500'} />}
+                        {res.type === 'title' && <FileText size={15} className={isSelected ? 'text-white' : 'text-blue-500'} />}
                         {res.type === 'tag' && <Hash size={15} className={isSelected ? 'text-white' : 'text-teal-500'} />}
                         {res.type === 'handwriting' && <Edit size={15} className={isSelected ? 'text-white' : 'text-accent-pink'} />}
                         {(res.type === 'content' || res.type === 'sticky') && <FileText size={15} className={isSelected ? 'text-white' : 'text-slate-400'} />}
                         
                         <div className="min-w-0">
                           <span className="text-xs truncate block font-medium">{res.preview}</span>
-                          <span className={`text-[10px] block opacity-80 ${isSelected ? 'text-violet-100' : 'text-slate-400 dark:text-zinc-500'}`}>
+                          <span className={`text-[10px] block opacity-80 ${isSelected ? 'text-blue-100' : 'text-slate-400 dark:text-zinc-500'}`}>
                             {res.noteTitle}
                           </span>
                         </div>
@@ -320,15 +320,15 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
                       }}
                       className={`w-full flex items-center justify-between px-3 py-2 rounded-lg text-left transition-colors ${
                         isSelected 
-                          ? 'bg-violet-500 text-white font-semibold shadow-sm' 
+                          ? 'bg-blue-500 text-white font-semibold shadow-sm' 
                           : 'hover:bg-slate-100/80 dark:hover:bg-zinc-800/40 text-slate-700 dark:text-zinc-300'
                       }`}
                     >
                       <div className="flex items-center gap-3">
-                        <div className={`${isSelected ? 'text-white' : 'text-violet-500'}`}>{act.icon}</div>
+                        <div className={`${isSelected ? 'text-white' : 'text-blue-500'}`}>{act.icon}</div>
                         <div>
                           <span className="text-xs font-medium block">{act.name}</span>
-                          <span className={`text-[10px] block opacity-80 ${isSelected ? 'text-violet-100' : 'text-slate-400 dark:text-zinc-500'}`}>
+                          <span className={`text-[10px] block opacity-80 ${isSelected ? 'text-blue-100' : 'text-slate-400 dark:text-zinc-500'}`}>
                             {act.desc}
                           </span>
                         </div>

@@ -20,17 +20,17 @@ export default {
           },
         },
         zenith: {
-          50: '#f5f3ff',
-          100: '#ede9fe',
-          200: '#ddd6fe',
-          300: '#c084fc', // purple accent
-          400: '#a855f7',
-          500: '#8b5cf6', // primary brand violet
-          600: '#7c3aed',
-          700: '#6d28d9',
-          800: '#4c1d95',
-          900: '#1a102f', // ultra dark violet bg
-          950: '#0b0518',
+          50: '#eff6ff',
+          100: '#dbeafe',
+          200: '#bfdbfe',
+          300: '#93c5fd',
+          400: '#60a5fa',
+          500: '#3b82f6', // primary brand blue
+          600: '#2563eb',
+          700: '#1d4ed8',
+          800: '#1e40af',
+          900: '#1e3a8a', // ultra dark blue bg
+          950: '#172554',
         },
         space: {
           800: '#0d0e15',

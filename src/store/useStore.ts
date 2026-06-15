@@ -316,12 +316,15 @@ window.addEventListener('keydown', (e) => {
       // Setters
       setActiveWorkspaceId: (id) => {
         const workspaceNotes = get().notes.filter(n => n.workspaceId === id);
+        const firstNoteId = workspaceNotes.length > 0 ? workspaceNotes[0].id : null;
         set({ 
           activeWorkspaceId: id, 
-          activeNoteId: workspaceNotes.length > 0 ? workspaceNotes[0].id : null,
+          activeNoteId: firstNoteId,
           zoom: 1,
           pan: { x: 0, y: 0 },
-          selectedObjectIds: []
+          selectedObjectIds: [],
+          undoStack: [],
+          redoStack: []
         });
       },
       setActiveNoteId: (id) => {

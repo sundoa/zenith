@@ -100,7 +100,7 @@ export const ShortcutsManager: React.FC<ShortcutsManagerProps> = ({ isOpen, onCl
         {/* Header */}
         <div className="flex items-center justify-between border-b border-slate-200 dark:border-zinc-800 pb-4 mb-4">
           <div className="flex items-center gap-2">
-            <Keyboard className="text-violet-500" size={18} />
+            <Keyboard className="text-blue-500" size={18} />
             <h2 className="text-base font-bold text-slate-900 dark:text-zinc-100">
               Shortcuts Manager
             </h2>
@@ -125,7 +125,7 @@ export const ShortcutsManager: React.FC<ShortcutsManagerProps> = ({ isOpen, onCl
         {/* Scrollable list */}
         <div className="flex-1 overflow-y-auto space-y-5 pr-1 text-xs">
           {/* Instructions */}
-          <div className="bg-violet-500/5 border border-violet-500/10 rounded-xl p-3 text-[11px] text-slate-600 dark:text-zinc-400 leading-relaxed">
+          <div className="bg-blue-500/5 border border-blue-500/10 rounded-xl p-3 text-[11px] text-slate-600 dark:text-zinc-400 leading-relaxed">
             Click the key badge next to any command to map a new trigger. Press your keyboard combo to register it. Avoid remapping browser control shortcuts.
           </div>
 
@@ -150,7 +150,7 @@ export const ShortcutsManager: React.FC<ShortcutsManagerProps> = ({ isOpen, onCl
                       {/* Remap badge trigger */}
                       {isRecording ? (
                         <div className="flex flex-col items-end gap-1">
-                          <div className="bg-violet-500 text-white font-mono px-2 py-1 rounded border border-violet-600 animate-pulse text-[10px]">
+                          <div className="bg-blue-500 text-white font-mono px-2 py-1 rounded border border-blue-600 animate-pulse text-[10px]">
                             {recordedKeys || 'Press keys...'}
                           </div>
                           {conflictWarning ? (
@@ -168,7 +168,7 @@ export const ShortcutsManager: React.FC<ShortcutsManagerProps> = ({ isOpen, onCl
                             setRecordedKeys('');
                             setConflictWarning(null);
                           }}
-                          className="bg-slate-200/60 dark:bg-zinc-800 hover:bg-violet-500 hover:text-white dark:hover:bg-violet-500 text-slate-600 dark:text-zinc-400 font-mono px-2 py-1 rounded text-[10px] border border-slate-300/30 dark:border-zinc-700/50 transition-colors uppercase select-none min-w-[70px] text-center"
+                          className="bg-slate-200/60 dark:bg-zinc-800 hover:bg-blue-500 hover:text-white dark:hover:bg-blue-500 text-slate-600 dark:text-zinc-400 font-mono px-2 py-1 rounded text-[10px] border border-slate-300/30 dark:border-zinc-700/50 transition-colors uppercase select-none min-w-[70px] text-center"
                         >
                           {sh.keys}
                         </button>
